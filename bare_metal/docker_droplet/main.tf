@@ -18,6 +18,7 @@ resource "digitalocean_droplet" "docker_droplet" {
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
+  tags = var.digitalocean_region_tags
   connection {
     host        = self.ipv4_address
     user        = "root"

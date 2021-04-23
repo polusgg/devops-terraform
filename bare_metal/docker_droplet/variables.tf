@@ -20,6 +20,10 @@ variable "digitalocean_region_slug" {
   type = string
 }
 
+variable "digitalocean_region_tags" {
+  type = list(string) 
+}
+
 variable "digitalocean_droplet_size" {
   type    = string
   default = "s-2vcpu-2gb"

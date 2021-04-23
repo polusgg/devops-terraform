@@ -6,6 +6,7 @@ resource "digitalocean_database_cluster" "redis_database" {
   region          = var.digitalocean_region_slug
   node_count      = 1
   eviction_policy = "noeviction"
+  tags            = var.digitalocean_region_tags
   maintenance_window {
     day = "wednesday"
     hour = "05:00:00"

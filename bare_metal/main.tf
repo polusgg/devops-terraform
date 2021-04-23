@@ -4,8 +4,9 @@
 module "redis_db" {
   source = "./redis_db"
 
-  redis_name               = "redis-na-west"
+  redis_name               = "redis-na"
   digitalocean_region_slug = var.digitalocean_region_slug
+  digitalocean_region_tags = [ "na" ]
 }
 
 
@@ -21,6 +22,7 @@ module "master-na-west" {
 
   droplet_name             = "master-na-west"
   digitalocean_region_slug = var.digitalocean_region_slug
+  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-master"])
 }
 
 resource "digitalocean_floating_ip" "na-west-fip" {
@@ -49,6 +51,7 @@ module "node-na-west-1" {
 
   droplet_name             = "node-na-west-1"
   digitalocean_region_slug = var.digitalocean_region_slug
+  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
 }
 
 module "node-na-west-2" {
@@ -60,6 +63,7 @@ module "node-na-west-2" {
 
   droplet_name             = "node-na-west-2"
   digitalocean_region_slug = var.digitalocean_region_slug
+  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
 }
 
 module "node-na-west-3" {
@@ -71,6 +75,7 @@ module "node-na-west-3" {
 
   droplet_name             = "node-na-west-3"
   digitalocean_region_slug = var.digitalocean_region_slug
+  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
 }
 
 /*

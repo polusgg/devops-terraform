@@ -13,3 +13,7 @@ variable "digitalocean_priv_key_file" {
 variable "digitalocean_region_slug" {
   type = string
 }
+
+variable "digitalocean_region_tags" {
+  type = list(string)
+}
