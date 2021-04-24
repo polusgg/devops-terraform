@@ -3,8 +3,12 @@
  */
 
 // Corresponds to the "Terraform" public key on DigitalOcean
-data "digitalocean_ssh_key" "terraform" {
-  name = var.digitalocean_key_name
+data "digitalocean_ssh_key" "terraform_mark" {
+  name = "Terraform (Mark)"
+}
+
+data "digitalocean_ssh_key" "terraform_cody" {
+  name = "Terraform (Cody)"
 }
 
 resource "digitalocean_droplet" "docker_droplet" {
@@ -16,7 +20,8 @@ resource "digitalocean_droplet" "docker_droplet" {
   size   = var.digitalocean_droplet_size
   private_networking = true
   ssh_keys = [
-    data.digitalocean_ssh_key.terraform.id
+    data.digitalocean_ssh_key.terraform_mark.id,
+    data.digitalocean_ssh_key.terraform_cody.id
   ]
   tags = var.digitalocean_region_tags
   connection {

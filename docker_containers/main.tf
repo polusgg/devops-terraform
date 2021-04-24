@@ -35,7 +35,7 @@ module "node-na-west-1" {
     docker = docker.node-na-west-1
   }
 
-  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-26"
+  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-27"
   container_name = "server-nodepolus"
   container_env = [
     "NP_REDIS_HOST=rediss://${data.terraform_remote_state.bare_metal.outputs.redis_db.redis_host}",
@@ -54,7 +54,7 @@ module "node-na-west-2" {
     docker = docker.node-na-west-2
   }
 
-  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-26"
+  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-27"
   container_name = "server-nodepolus"
   container_env = [
     "NP_REDIS_HOST=rediss://${data.terraform_remote_state.bare_metal.outputs.redis_db.redis_host}",
@@ -73,7 +73,7 @@ module "node-na-west-3" {
     docker = docker.node-na-west-3
   }
 
-  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-26"
+  docker_image = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-27"
   container_name = "server-nodepolus"
   container_env = [
     "NP_REDIS_HOST=rediss://${data.terraform_remote_state.bare_metal.outputs.redis_db.redis_host}",
