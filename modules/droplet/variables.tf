@@ -1,6 +1,6 @@
 // Droplet common configuration
 variable "name" {
-  description = "Name of the droplet"
+  description = "Droplet name"
   type = string
 }
 
