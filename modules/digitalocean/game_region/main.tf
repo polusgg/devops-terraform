@@ -39,69 +39,41 @@ resource "digitalocean_record" "this" {
 }
 
 
-
 /*
  *  Nodes
  */
-module "node-na-west-1" {
-  source = "./docker_droplet"
-  
-  // SSH Keys
-  digitalocean_key_name      = var.digitalocean_key_name
-  digitalocean_priv_key_file = var.digitalocean_priv_key_file
+module "node" {
+  source = "../droplet"
+  for_each = var.nodes
 
-  droplet_name             = "node-na-west-1"
-  digitalocean_region_slug = var.digitalocean_region_slug
-  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
-}
 
-module "node-na-west-2" {
-  source = "./docker_droplet"
+  droplet_name = each.value.name
+  region_slug  = var.region
+  tags         = concat(each.value.tags, ["game-node"])
+
 
   // SSH Keys
-  digitalocean_key_name      = var.digitalocean_key_name
-  digitalocean_priv_key_file = var.digitalocean_priv_key_file
-
-  droplet_name             = "node-na-west-2"
-  digitalocean_region_slug = var.digitalocean_region_slug
-  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
-}
-
-module "node-na-west-3" {
-  source = "./docker_droplet"
-  
-  // SSH Keys
-  digitalocean_key_name      = var.digitalocean_key_name
-  digitalocean_priv_key_file = var.digitalocean_priv_key_file
-
-  droplet_name             = "node-na-west-3"
-  digitalocean_region_slug = var.digitalocean_region_slug
-  digitalocean_region_tags = concat(var.digitalocean_region_tags, ["game-node"])
+  ssh_key_ids        = var.ssh_key_ids
+  priv_key_file_path = var.priv_key_file_path
 }
 
 /*
  *  Firewall
  */
-resource "digitalocean_database_firewall" "redis-fw" {
+resource "digitalocean_database_firewall" "redis_master_fw" {
   cluster_id = module.redis_db.id
+  rule {
+    type  = "droplet"
+    value = module.master.id
+  }
+}
+resource "digitalocean_database_firewall" "redis_node_fw" {
+  for_each = module.node
 
-  rule {
-    type  = "droplet"
-    value = module.master-na-west.id
-  }
 
+  cluster_id = module.redis_db.id
   rule {
     type  = "droplet"
-    value = module.node-na-west-1.id
-  }
-  
-  rule {
-    type  = "droplet"
-    value = module.node-na-west-2.id
-  }
-  
-  rule {
-    type  = "droplet"
-    value = module.node-na-west-3.id
+    value = each.value.id
   }
 }
