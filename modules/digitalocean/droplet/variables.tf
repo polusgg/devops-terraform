@@ -1,4 +1,3 @@
-// Droplet common configuration
 variable "name" {
   description = "Droplet name"
   type = string
@@ -29,8 +28,10 @@ variable "tags" {
 
 // SSH
 variable "ssh_key_ids" {
+  description = "DigitalOcean SSH key ids"
   type = list(number) 
 }
 variable "priv_key_file_path" {
-    type = string
+  description = "Private key file path"
+  type = string
 }
