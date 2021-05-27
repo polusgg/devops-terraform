@@ -1,3 +1,17 @@
+variable "host" {
+  description = "Docker Engine host URI address"
+  type = string
+}
+
+variable "registry" {
+  description = "Docker Registry configuration"
+  type = object({
+    address = string
+    username = string
+    password = string
+  })
+}
+
 variable "image" {
   description = "Docker container image"
   type = string

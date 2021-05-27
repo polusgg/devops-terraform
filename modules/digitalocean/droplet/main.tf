@@ -9,7 +9,7 @@ resource "digitalocean_droplet" "this" {
   tags = var.tags
   
   // SSH
-  ssh_keys = ssh_key_ids
+  ssh_keys = var.ssh_key_ids
   connection {
     host        = self.ipv4_address
     user        = "root"
@@ -20,6 +20,6 @@ resource "digitalocean_droplet" "this" {
 
   // Provisioners
   provisioner "remote-exec" {
-    command = "sudo ufw allow 22023/udp"
+    inline = [ "sudo ufw allow 22023/udp" ]
   }
 }
