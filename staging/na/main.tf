@@ -34,7 +34,6 @@ module "na_west_droplets" {
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "NP_DISABLE_AUTH=false"
     ]
-
   }
 
   node_docker = {

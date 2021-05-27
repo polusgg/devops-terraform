@@ -5,8 +5,8 @@ terraform {
       version = "2.8.0"
     }
     docker = {
-      source = "cybershard/docker"
-      version = "1.0.0"
+      source = "polusgg/docker"
+      version = "1.0.1"
     }
   }
 }
