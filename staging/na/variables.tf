@@ -28,4 +28,5 @@ variable "ssh_key_name" {
 variable "priv_key" {
   description = "SSH private key"
   type = string
+  sensitive = true
 }
