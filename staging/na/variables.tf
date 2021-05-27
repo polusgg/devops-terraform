@@ -10,6 +10,7 @@ variable "digitalocean_registry_token" {
   sensitive = true
 }
 
+
 // Accounts
 variable "accounts_auth_token" {
   description = "Accounts API token for NP_AUTH_TOKEN"
@@ -17,12 +18,14 @@ variable "accounts_auth_token" {
   sensitive = true
 }
 
+
 // SSH
 variable "ssh_key_name" {
   description = "DigitalOcean SSH key name"
   type = string
 }
-variable "priv_key_file_path" {
-  description = "Private key file path"
+
+variable "priv_key" {
+  description = "SSH private key"
   type = string
 }

@@ -3,7 +3,7 @@ data "digitalocean_ssh_key" "terraform" {
 }
 
 /*
- *  DigitalOcean
+ * DigitalOcean
  */
 module "redis_db" {
   source = "../../modules/digitalocean/redis_db"
@@ -57,5 +57,5 @@ module "na_west_droplets" {
   }
 
   ssh_key_ids        = [ data.digitalocean_ssh_key.terraform.id ]
-  priv_key_file_path = var.priv_key_file_path
+  priv_key = var.priv_key
 }

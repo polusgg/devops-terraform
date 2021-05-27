@@ -8,6 +8,7 @@ variable "region_name" {
   type = string
 }
 
+
 /*
  *  Nodes
  */
@@ -21,6 +22,7 @@ variable "tags" {
   type = list(string)
 }
 
+
 /*
  *  Firewall/Redis DB
  */
@@ -28,6 +30,7 @@ variable "redis_db_id" {
   description = "Redis DB ID for firewall rules"
   type = string
 }
+
 
 /*
  *  Docker
@@ -57,12 +60,14 @@ variable "registry" {
   })
 }
 
+
 // SSH
 variable "ssh_key_ids" {
   description = "DigitalOcean SSH key ids"
   type = list(number) 
 }
-variable "priv_key_file_path" {
-  description = "Private key file path"
+
+variable "priv_key" {
+  description = "SSH private key"
   type = string
 }

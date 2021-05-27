@@ -9,8 +9,8 @@ module "master" {
   tags         = concat(var.tags, ["game-master"])
 
   // SSH Keys
-  ssh_key_ids        = var.ssh_key_ids
-  priv_key_file_path = var.priv_key_file_path
+  ssh_key_ids = var.ssh_key_ids
+  priv_key    = var.priv_key
 }
 
 resource "digitalocean_floating_ip" "this" {
@@ -21,7 +21,6 @@ resource "digitalocean_floating_ip" "this" {
 resource "digitalocean_record" "this" {
   domain = "polus.gg"
   type   = "A"
-  // TODO: This must be changed after a region is put into a module (name = "${var.master_name}.public.play")
   name   = "master-${var.region_name}.public.play"
   value  = digitalocean_floating_ip.this.ip_address
 }
@@ -41,9 +40,10 @@ module "node" {
 
 
   // SSH Keys
-  ssh_key_ids        = var.ssh_key_ids
-  priv_key_file_path = var.priv_key_file_path
+  ssh_key_ids = var.ssh_key_ids
+  priv_key    = var.priv_key
 }
+
 
 /*
  *  Firewall
@@ -69,6 +69,7 @@ resource "digitalocean_database_firewall" "redis_fw" {
     }
   }
 }
+
 
 /*
  *  Docker

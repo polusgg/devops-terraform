@@ -31,7 +31,8 @@ variable "ssh_key_ids" {
   description = "DigitalOcean SSH key ids"
   type = list(number) 
 }
-variable "priv_key_file_path" {
-  description = "Private key file path"
+
+variable "priv_key" {
+  description = "SSH private key"
   type = string
 }
