@@ -2,7 +2,7 @@ terraform {
   required_providers {
     docker = {
       source = "polusgg/docker"
-      version = "1.0.1"
+      version = "1.0.2"
     }
   }
 }

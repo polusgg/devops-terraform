@@ -5,7 +5,7 @@ resource "digitalocean_database_cluster" "redis" {
   size            = "db-s-1vcpu-1gb"
   region          = var.region_slug
   node_count      = 1
-  tags            = var.tags
+  tags            = concat(var.tags, [ "terraform" ])
   eviction_policy = "noeviction"
   maintenance_window {
     day = "wednesday"

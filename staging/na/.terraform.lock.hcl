@@ -24,23 +24,41 @@ provider "registry.terraform.io/digitalocean/digitalocean" {
   ]
 }
 
-provider "registry.terraform.io/polusgg/docker" {
-  version     = "1.0.1"
-  constraints = "1.0.1"
+provider "registry.terraform.io/hashicorp/local" {
+  version = "2.1.0"
   hashes = [
-    "h1:o7nmZGh/zzfBH+vbxf++nOV3IFA+LAUDRIbzXFav4OM=",
-    "zh:0aefebda6c14b507e59c3b1b07bc6e959a818bf1b272717760c5c45b443c70e1",
-    "zh:138526b07cef9d0838cf544f1db952237e6e3df6bb7ed5193f401b58c11c2435",
-    "zh:19b93e95bcef838265acf6e675d7bf380ea87954ad2acd9c0025cbe2c9983877",
-    "zh:327db95289a07d8067623ce05a9e6c04b99b098b99c207c467a11a3951064182",
-    "zh:446e77f017bf0a950fd56fcdea91d88a35af5fd5d2381d5264831a904f880a3e",
-    "zh:5a2d7ffe5c1b6f269b21447b0743f09fe79d69f71a0ef57655dc95d195126a76",
-    "zh:6bddb756192730fa5481a71a11a48ff4d8af2c7731454cd5992e81787c8e4abc",
-    "zh:7aca3f008f55aba8548aa34650b53f4d4f52c446aa21a61efd63baccdcde8195",
-    "zh:81e38712cc7adb8bb9be812ff04a0c60bb8f3ba17c32966ad1039c7c7dae681e",
-    "zh:881f432cef1d725eca004036faf386b57554cab464e728a8adb873d6df1cd2ab",
-    "zh:a7d4053fb87cf6ec41b02292c2d4c4923c3ea0e5114d114b1a5279dbade2422b",
-    "zh:cd103db5a63326390cc7f65499b68058ba1e5462c439839e2bad886f8e112ee0",
-    "zh:e7c59b1e813cb1786eb085f9f4e4a87c10f6b34fcbd0ca10c677e2608c8608f5",
+    "h1:EYZdckuGU3n6APs97nS2LxZm3dDtGqyM4qaIvsmac8o=",
+    "zh:0f1ec65101fa35050978d483d6e8916664b7556800348456ff3d09454ac1eae2",
+    "zh:36e42ac19f5d68467aacf07e6adcf83c7486f2e5b5f4339e9671f68525fc87ab",
+    "zh:6db9db2a1819e77b1642ec3b5e95042b202aee8151a0256d289f2e141bf3ceb3",
+    "zh:719dfd97bb9ddce99f7d741260b8ece2682b363735c764cac83303f02386075a",
+    "zh:7598bb86e0378fd97eaa04638c1a4c75f960f62f69d3662e6d80ffa5a89847fe",
+    "zh:ad0a188b52517fec9eca393f1e2c9daea362b33ae2eb38a857b6b09949a727c1",
+    "zh:c46846c8df66a13fee6eff7dc5d528a7f868ae0dcf92d79deaac73cc297ed20c",
+    "zh:dc1a20a2eec12095d04bf6da5321f535351a594a636912361db20eb2a707ccc4",
+    "zh:e57ab4771a9d999401f6badd8b018558357d3cbdf3d33cc0c4f83e818ca8e94b",
+    "zh:ebdcde208072b4b0f8d305ebf2bfdc62c926e0717599dcf8ec2fd8c5845031c3",
+    "zh:ef34c52b68933bedd0868a13ccfd59ff1c820f299760b3c02e008dc95e2ece91",
+  ]
+}
+
+provider "registry.terraform.io/polusgg/docker" {
+  version     = "1.0.2"
+  constraints = "1.0.2"
+  hashes = [
+    "h1:T2UiMkQeHUQDHkhQn3uId3xQ4gj9+JTexC0DE1iCftk=",
+    "zh:02b3ac413c7d8d3624d1a47fb454e2438b0756ad661886d99c0f8f0ca7e8e1bb",
+    "zh:1e811af3cc42d600a18611fb0b6a897725c9c8f51e090dbb9f5610e49011015c",
+    "zh:6aacde71d11ec1992a0b82e7a00002b2ff3de308d78dd33e1166276fb62546ab",
+    "zh:6b3666391c3069a97a88d2c9d6669940d46cf22ad7b212fd0a1aefd629ced527",
+    "zh:73ed892fff157fee6aa5a3b3c208f7dacb5db354c2e8791e55b38c84e2e9744b",
+    "zh:7b2c8dbcd0467f256f032f8e0887d109fb1bce06800a35b4a378e293715519c7",
+    "zh:8d2c8c018029709883aa5c3342845ca8e1f20bf8dcb14bd393ce045c113e62e9",
+    "zh:a426b83506443afa6a2c288b262fff18a1f4326c277dbe8be8adf65b547434e5",
+    "zh:a659d58eb7e8a6ac220369f0903539a7eaf3080f08110afaec112e283503c3f8",
+    "zh:b74b917dc6b8d8eb648a55804b6707087c7f1c5de58700263a15d6f34e9e9ebb",
+    "zh:b9ef175fe900a6edd29d9213f4382fabbf8f4014f42d1e7aed4a982727546398",
+    "zh:d4d837a70ec8ec14136b0309133588632089a2eb30b152e8a2d37d331fd39cdc",
+    "zh:dd3f5141f11335c4b461b10f14c5783ba3fb81275da4aee3fdb551164dc8fae0",
   ]
 }

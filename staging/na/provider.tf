@@ -1,4 +1,11 @@
 terraform {
+  backend "remote" {
+    organization = "polus"
+
+    workspaces {
+      name = "staging-na"
+    }
+  }
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
@@ -6,7 +13,7 @@ terraform {
     }
     docker = {
       source = "polusgg/docker"
-      version = "1.0.1"
+      version = "1.0.2"
     }
   }
 }

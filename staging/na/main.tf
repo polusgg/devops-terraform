@@ -1,5 +1,14 @@
+/*
+ * SSH Keys
+ */
 data "digitalocean_ssh_key" "terraform" {
   name = var.ssh_key_name
+}
+
+resource "local_file" "ssh_priv_key" {
+  content = var.priv_key
+  filename = "${abspath(path.root)}/id_ed25519_polusgg_terraform"
+  file_permission = "0600"
 }
 
 /*
@@ -55,6 +64,6 @@ module "na_west_droplets" {
     password = var.digitalocean_registry_token
   }
 
-  ssh_key_ids        = [ data.digitalocean_ssh_key.terraform.id ]
-  priv_key = var.priv_key
+  ssh_key_ids = [ data.digitalocean_ssh_key.terraform.id ]
+  priv_key    = local_file.ssh_priv_key.filename
 }

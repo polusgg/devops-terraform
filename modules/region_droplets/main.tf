@@ -6,7 +6,7 @@ module "master" {
 
   name = "master-${var.region_name}"
   region_slug  = var.region_slug
-  tags         = concat(var.tags, ["game-master"])
+  tags         = concat(var.tags, ["game-master", "terraform"])
 
   // SSH Keys
   ssh_key_ids = var.ssh_key_ids
@@ -36,7 +36,7 @@ module "node" {
 
   name = "node-${var.region_name}-${count.index + 1}"
   region_slug  = var.region_slug
-  tags         = concat(var.tags, ["game-node"])
+  tags         = concat(var.tags, ["game-node", "terraform"])
 
 
   // SSH Keys
@@ -78,6 +78,7 @@ module "master_docker" {
   source = "../docker_engine"
 
   host     = "ssh://root@${module.master.ipv4_addr}:22"
+  priv_key = var.priv_key
   registry = var.registry
 
   image    = var.master_docker.image
@@ -90,6 +91,7 @@ module "node_docker" {
   count  = var.node_count
 
   host     = "ssh://root@${module.node[count.index].ipv4_addr}:22"
+  priv_key = var.priv_key
   registry = var.registry
 
   image    = var.node_docker.image

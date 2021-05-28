@@ -1,6 +1,7 @@
 resource "docker_image" "this" {
   client {
     host = var.host
+    private_key = var.priv_key
     registry_address  = var.registry.address
     registry_username = var.registry.username
     registry_password = var.registry.password
@@ -12,6 +13,7 @@ resource "docker_image" "this" {
 resource "docker_container" "this" {
   client {
     host = var.host
+    private_key = var.priv_key
     registry_address  = var.registry.address
     registry_username = var.registry.username
     registry_password = var.registry.password

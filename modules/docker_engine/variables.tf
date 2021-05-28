@@ -26,3 +26,9 @@ variable "env" {
   description = "Docker container environment"
   type = list(string)
 }
+
+// SSH
+variable "priv_key" {
+  description = "SSH private key"
+  type = string
+}
