@@ -10,6 +10,11 @@ variable "digitalocean_registry_token" {
   sensitive = true
 }
 
+variable "node_count" {
+  description = "Number of game server nodes"
+  type = number
+}
+
 
 // Accounts
 variable "accounts_auth_token" {

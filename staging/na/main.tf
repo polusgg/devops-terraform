@@ -7,7 +7,7 @@ data "digitalocean_ssh_key" "terraform" {
 
 resource "local_file" "ssh_priv_key" {
   content = var.priv_key
-  filename = "${abspath(path.root)}/id_ed25519_polusgg_terraform"
+  filename = "${path.root}/id_ed25519_polusgg_terraform"
   file_permission = "0600"
 }
 
@@ -28,7 +28,7 @@ module "na_west_droplets" {
   region_slug        = "sfo3"
   region_name        = "na-west"
 
-  node_count         = 3
+  node_count         = var.node_count
   tags               = [ "na", "na-west" ]
 
   redis_db_id        = module.redis_db.id
