@@ -7,7 +7,7 @@ module "mongodb" {
 
   name = "cosmetics-mongodb"
   region_slug  = "nyc1"
-  image = "mongodb-20-04"
+  image = "mongodb-18-04"
   size_slug = "s-1vcpu-1gb"
 
   tags         = ["cosmetics", "terraform"]
