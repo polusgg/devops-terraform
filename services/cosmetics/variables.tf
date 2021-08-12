@@ -1,5 +1,30 @@
+// DigitalOcean
 variable "digitalocean_token" {
   description = "DigitalOcean API token"
+  type = string
+  sensitive = true
+}
+
+variable "digitalocean_registry_token" {
+  description = "DigitalOcean Docker Registry token"
+  type = string
+  sensitive = true
+}
+
+// Docker
+variable "docker_image" {
+  description = "Docker container image"
+  type = string
+}
+
+// Accounts
+variable "accounts_auth_token" {
+  description = "Polus.gg accounts API token"
+  type = string
+  sensitive = true
+}
+variable "steam_publisher_key" {
+  description = "Steam WebAPI publisher authentication token"
   type = string
   sensitive = true
 }

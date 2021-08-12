@@ -83,7 +83,7 @@ module "master_docker" {
 
   image    = var.master_docker.image
   name     = "server-loadpolus"
-  env      = var.master_docker.env
+  env      = concat(var.master_docker.env, ["NP_DROPLET_ADDRESS=${module.master.ipv4_addr}"])
 }
 
 module "node_docker" {
@@ -96,5 +96,5 @@ module "node_docker" {
 
   image    = var.node_docker.image
   name     = "server-nodepolus"
-  env      = var.node_docker.env
+  env      = concat(var.master_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}"])
 }

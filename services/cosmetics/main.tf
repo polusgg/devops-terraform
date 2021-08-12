@@ -1,13 +1,34 @@
+/*
+ *  SSH Keys
+ */
 data "digitalocean_ssh_key" "terraform" {
   name = var.ssh_key_name
 }
+resource "local_file" "ssh_priv_key" {
+  content = var.priv_key
+  filename = "${path.root}/id_ed25519_polusgg_terraform"
+  file_permission = "0600"
+}
 
-resource "digitalocean_droplet" "mongodb" {
-  name   = "cosmetics-mongodb"
-  region = "nyc1"
+/*
+ *  Resources
+ */
+resource "digitalocean_database_cluster" "mongodb" {
+  name       = "mongodb-cosmetics"
+  engine     = "mongodb"
+  version    = "4"
+  size       = "db-s-1vcpu-1gb"
+  region     = "nyc3"
+  node_count = 1
+  tags = ["cosmetics", "terraform"]
+}
+
+resource "digitalocean_droplet" "cosmetics_web" {
+  name   = "cosmetics-web-1"
+  region = "nyc3"
 
   // Common configuration
-  image  = "mongodb-18-04"
+  image  = "docker-20-04"
   size   = "s-1vcpu-1gb"
   private_networking = true
   tags = ["cosmetics", "terraform"]
@@ -24,6 +45,63 @@ resource "digitalocean_droplet" "mongodb" {
 
   // Provisioners
   provisioner "remote-exec" {
-    inline = [ "sudo ufw allow 27017" ]
+    inline = [ "sudo ufw allow 2219/tcp" ]
   }
+}
+
+
+
+/*
+ *  Docker
+ */
+resource "docker_image" "cosmetics" {
+  client {
+    host = "ssh://root@${digitalocean_droplet.cosmetics_web.ipv4_address}:22"
+    private_key = local_file.ssh_priv_key.filename
+    registry_address  = "registry.digitalocean.com"
+    registry_username = var.digitalocean_registry_token
+    registry_password = var.digitalocean_registry_token
+  }
+
+  name = var.docker_image
+}
+
+resource "docker_container" "cosmetics" {
+  client {
+    host = "ssh://root@${digitalocean_droplet.cosmetics_web.ipv4_address}:22"
+    private_key = local_file.ssh_priv_key.filename
+    registry_address  = "registry.digitalocean.com"
+    registry_username = var.digitalocean_registry_token
+    registry_password = var.digitalocean_registry_token
+  }
+
+  image   = docker_image.cosmetics.latest
+  name    = "server-cosmetics"
+  env     = [
+    "STEAM_PUBLISHER_KEY=${var.steam_publisher_key}",
+    "ACCOUNT_AUTH_TOKEN=${var.accounts_auth_token}",
+    "DATABASE_URL=mongodb+srv://${digitalocean_database_cluster.mongodb.private_uri}",
+    "CA_CERT_PATH=./ca-certificate-pggcosmetics.crt"
+  ]
+  restart = "always"
+  ports {
+    internal = 2219
+    external = 2219
+    protocol = "tcp"
+  }
+}
+
+
+/*
+ *  Project Assignment
+ */
+data "digitalocean_project" "this" {
+  name = "Polus.gg Web"
+}
+resource "digitalocean_project_resources" "this" {
+  project = data.digitalocean_project.this.id
+  resources = [
+    digitalocean_database_cluster.mongodb.urn,
+    digitalocean_droplet.cosmetics_web.urn
+  ]
 }
