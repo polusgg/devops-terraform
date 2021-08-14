@@ -13,9 +13,9 @@ resource "digitalocean_database_cluster" "mongodb" {
 
 resource "digitalocean_record" "this" {
   domain = "polus.gg"
-  type   = "A"
+  type   = "CNAME"
   name   = "event-logging.mongo.service"
-  value  = digitalocean_database_cluster.mongodb.host
+  value  = "${digitalocean_database_cluster.mongodb.host}."
 }
 
 /*
