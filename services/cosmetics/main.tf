@@ -82,6 +82,13 @@ resource "docker_container" "cosmetics" {
   }
 }
 
+resource "digitalocean_record" "this" {
+  domain = "polus.gg"
+  type   = "A"
+  name   = "cosmetics.asset"
+  value  = digitalocean_droplet.cosmetics_web.ipv4_address
+}
+
 
 /*
  *  Project Assignment
