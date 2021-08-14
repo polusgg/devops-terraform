@@ -53,7 +53,6 @@ module "na_west_droplets" {
       "NP_REDIS_PASSWORD=${module.redis_db.password}",
       "NP_DROPLET_PORT=22023",
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
-      "NP_DISABLE_AUTH=false",
       "MONGO_URL=${var.event_logging_mongodb_url}",
       "NP_IS_CREATOR_SERVER=false"
     ]
