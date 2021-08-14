@@ -13,15 +13,6 @@ resource "local_file" "ssh_priv_key" {
 /*
  *  Resources
  */
-resource "digitalocean_database_cluster" "mongodb" {
-  name       = "mongodb-cosmetics"
-  engine     = "mongodb"
-  version    = "4"
-  size       = "db-s-1vcpu-1gb"
-  region     = "nyc3"
-  node_count = 1
-  tags = ["cosmetics", "terraform"]
-}
 
 resource "digitalocean_droplet" "cosmetics_web" {
   name   = "cosmetics-web-1"
@@ -80,7 +71,7 @@ resource "docker_container" "cosmetics" {
   env     = [
     "STEAM_PUBLISHER_KEY=${var.steam_publisher_key}",
     "ACCOUNT_AUTH_TOKEN=${var.accounts_auth_token}",
-    "DATABASE_URL=mongodb+srv://${digitalocean_database_cluster.mongodb.private_uri}",
+    "DATABASE_URL=${var.mongodb_url}",
     "CA_CERT_PATH=./ca-certificate-pggcosmetics.crt"
   ]
   restart = "always"
@@ -101,7 +92,6 @@ data "digitalocean_project" "this" {
 resource "digitalocean_project_resources" "this" {
   project = data.digitalocean_project.this.id
   resources = [
-    digitalocean_database_cluster.mongodb.urn,
     digitalocean_droplet.cosmetics_web.urn
   ]
 }

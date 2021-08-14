@@ -17,6 +17,12 @@ variable "docker_image" {
   type = string
 }
 
+variable "mongodb_url" {
+  description = "Mongodb Connection URI"
+  type = string
+  sensitive = true
+}
+
 // Accounts
 variable "accounts_auth_token" {
   description = "Polus.gg accounts API token"
