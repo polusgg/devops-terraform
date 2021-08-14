@@ -22,6 +22,11 @@ variable "accounts_auth_token" {
   type = string
   sensitive = true
 }
+variable "event_logging_mongodb_url" {
+  description = "Event Logging MongoDB Connection URI"
+  type = string
+  sensitive = true
+}
 
 
 // SSH
