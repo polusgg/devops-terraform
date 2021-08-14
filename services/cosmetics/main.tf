@@ -85,7 +85,7 @@ resource "docker_container" "cosmetics" {
 resource "digitalocean_record" "this" {
   domain = "polus.gg"
   type   = "A"
-  name   = "cosmetics.asset"
+  name   = "cosmetics.service"
   value  = digitalocean_droplet.cosmetics_web.ipv4_address
 }
 
@@ -94,7 +94,7 @@ resource "digitalocean_record" "this" {
  *  Project Assignment
  */
 data "digitalocean_project" "this" {
-  name = "Polus.gg Web"
+  name = "Polus.gg Services"
 }
 resource "digitalocean_project_resources" "this" {
   project = data.digitalocean_project.this.id
