@@ -6,7 +6,7 @@ resource "digitalocean_database_cluster" "mongodb" {
   engine     = "mongodb"
   version    = "4"
   size       = "db-s-1vcpu-1gb"
-  region     = "nyc3"
+  region     = "nyc1"
   node_count = 1
   tags = ["event-logging", "terraform"]
 }
