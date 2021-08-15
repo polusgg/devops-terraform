@@ -34,24 +34,22 @@ module "na_west_droplets" {
   redis_db_id        = module.redis_db.id
 
   master_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-17"
+    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-19"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
       "NP_REDIS_PASSWORD=${module.redis_db.password}",
-      "NP_DROPLET_PORT=22023",
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "NP_DISABLE_AUTH=false"
     ]
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-50"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-51"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
       "NP_REDIS_PASSWORD=${module.redis_db.password}",
-      "NP_DROPLET_PORT=22023",
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "MONGO_URL=${var.event_logging_mongodb_url}",
       "NP_IS_CREATOR_SERVER=false"
