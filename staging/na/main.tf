@@ -45,13 +45,14 @@ module "na_west_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-52"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-55"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
       "NP_REDIS_PASSWORD=${module.redis_db.password}",
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "MONGO_URL=${var.event_logging_mongodb_url}",
+      "NP_REGION_NAME=NA [WEST]",
       "NP_IS_CREATOR_SERVER=false"
     ]
   }
