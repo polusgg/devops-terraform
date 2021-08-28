@@ -53,7 +53,6 @@ module "na_west_droplets" {
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "MONGO_URL=${var.event_logging_mongodb_url}",
       "NP_REGION_NAME=NA [WEST]",
-      "ENABLE_AUTHAPI_LOBBY_CODES=true",
       "NP_IS_CREATOR_SERVER=false"
     ]
   }
