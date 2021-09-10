@@ -44,6 +44,21 @@ module "node" {
   priv_key    = var.priv_key
 }
 
+module "node_creator" {
+  source = "../digitalocean/droplet"
+  count = var.node_count
+
+
+  name = "node-${var.region_name}-creator-${count.index + 1}"
+  region_slug  = var.region_slug
+  tags         = concat(var.tags, ["game-node", "terraform"])
+
+
+  // SSH Keys
+  ssh_key_ids = var.ssh_key_ids
+  priv_key    = var.priv_key
+}
+
 
 /*
  *  Firewall
@@ -63,6 +78,14 @@ resource "digitalocean_database_firewall" "redis_fw" {
 
   dynamic "rule" {
     for_each = module.node[*]
+    content {
+      type  = "droplet"
+      value = rule.value.id
+    }
+  }
+
+  dynamic "rule" {
+    for_each = module.node_creator[*]
     content {
       type  = "droplet"
       value = rule.value.id
@@ -96,5 +119,18 @@ module "node_docker" {
 
   image    = var.node_docker.image
   name     = "server-nodepolus"
-  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}"])
+  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=false"])
+}
+
+module "node_docker_creator" {
+  source = "../docker_engine"
+  count  = var.creator_node_count
+
+  host     = "ssh://root@${module.node_creator[count.index].ipv4_addr}:22"
+  priv_key = var.priv_key
+  registry = var.registry
+
+  image    = var.node_docker.image
+  name     = "server-nodepolus"
+  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=true"])
 }

@@ -29,6 +29,7 @@ module "na_west_droplets" {
   region_name        = "na-west"
 
   node_count         = var.node_count
+  creator_node_count = var.creator_node_count
   tags               = [ "na", "na-west" ]
 
   redis_db_id        = module.redis_db.id
@@ -45,7 +46,7 @@ module "na_west_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-63"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-74"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
@@ -53,7 +54,6 @@ module "na_west_droplets" {
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "MONGO_URL=${var.event_logging_mongodb_url}",
       "NP_REGION_NAME=NA [WEST]",
-      "NP_IS_CREATOR_SERVER=false"
     ]
   }
 

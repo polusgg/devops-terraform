@@ -17,6 +17,11 @@ variable "node_count" {
   type = number
 }
 
+variable "creator_node_count" {
+  description = "Number of creator game server nodes"
+  type = number
+}
+
 variable "tags" {
   description = "Droplet tags"
   type = list(string)

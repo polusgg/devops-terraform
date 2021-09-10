@@ -23,6 +23,7 @@ resource "docker_container" "this" {
   name    = var.name
   env     = var.env
   restart = "always"
+  destroy_grace_seconds = 10
   ports {
     internal = 22023
     external = 22023
