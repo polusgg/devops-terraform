@@ -27,16 +27,6 @@ variable "tags" {
   type = list(string)
 }
 
-
-/*
- *  Firewall/Redis DB
- */
-variable "redis_db_id" {
-  description = "Redis DB ID for firewall rules"
-  type = string
-}
-
-
 /*
  *  Docker
  */

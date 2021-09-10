@@ -61,40 +61,6 @@ module "node_creator" {
 
 
 /*
- *  Firewall
- */
-resource "digitalocean_database_firewall" "redis_fw" {
-  depends_on = [
-    module.master,
-    module.node
-  ]
-
-  cluster_id = var.redis_db_id
-
-  rule {
-    type  = "droplet"
-    value = module.master.id
-  }
-
-  dynamic "rule" {
-    for_each = module.node[*]
-    content {
-      type  = "droplet"
-      value = rule.value.id
-    }
-  }
-
-  dynamic "rule" {
-    for_each = module.node_creator[*]
-    content {
-      type  = "droplet"
-      value = rule.value.id
-    }
-  }
-}
-
-
-/*
  *  Docker
  */
 module "master_docker" {
@@ -132,5 +98,5 @@ module "node_docker_creator" {
 
   image    = var.node_docker.image
   name     = "server-nodepolus"
-  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=true"])
+  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node_creator[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=true"])
 }

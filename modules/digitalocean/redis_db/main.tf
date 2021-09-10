@@ -12,3 +12,25 @@ resource "digitalocean_database_cluster" "redis" {
     hour = "05:00:00"
   }  
 }
+
+/*
+ *  Firewall
+ */
+resource "digitalocean_database_firewall" "redis_fw" {
+  cluster_id = digitalocean_database_cluster.redis.id
+
+  rule {
+    type  = "tag"
+    value = "game-master"
+  }
+
+  rule {
+    type  = "tag"
+    value = "game-node"
+  }
+
+  rule {
+    type = "ip_addr"
+    value = "72.68.129.83"
+  }
+}

@@ -5,6 +5,11 @@ output "id" {
 
 output "host" {
   description = "Redis DB host address"
+  value = digitalocean_database_cluster.redis.host
+}
+
+output "private_host" {
+  description = "Redis DB host address"
   value = digitalocean_database_cluster.redis.private_host
 }
 
