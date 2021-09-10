@@ -46,7 +46,7 @@ module "node" {
 
 module "node_creator" {
   source = "../digitalocean/droplet"
-  count = var.node_count
+  count = var.creator_node_count
 
 
   name = "node-${var.region_name}-creator-${count.index + 1}"
