@@ -33,7 +33,7 @@ module "europe_droplets" {
   tags               = [ "europe" ]
 
   master_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-20"
+    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-22"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
@@ -44,7 +44,7 @@ module "europe_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-76"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-79"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
