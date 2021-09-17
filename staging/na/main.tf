@@ -44,7 +44,7 @@ module "na_west_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-81"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-102"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",

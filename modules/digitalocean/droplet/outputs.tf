@@ -7,3 +7,9 @@ output "ipv4_addr" {
   description = "Droplet IPv4 address"
   value = digitalocean_droplet.this.ipv4_address
 }
+
+output "node" {
+  description = "Droplet node name"
+  value = digitalocean_droplet.this.name
+}
+
