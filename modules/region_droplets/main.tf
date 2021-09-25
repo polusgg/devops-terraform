@@ -85,7 +85,7 @@ module "node_docker" {
 
   image    = var.node_docker.image
   name     = "server-nodepolus"
-  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=false", "NP_NODE_HOSTNAME=${module.node[count.index].node}"])
+  env      = concat(var.node_docker.env, ["NP_DROPLET_ADDRESS=${module.node[count.index].ipv4_addr}", "NP_IS_CREATOR_SERVER=false", "NP_NODE_HOSTNAME=${module.node[count.index].name}"])
 }
 
 module "node_docker_creator" {
