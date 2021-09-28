@@ -33,7 +33,7 @@ module "asia_droplets" {
   tags               = [ "asia" ]
 
   master_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-22"
+    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-23"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
@@ -44,7 +44,7 @@ module "asia_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-117"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-121"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
