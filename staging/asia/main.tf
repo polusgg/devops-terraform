@@ -17,23 +17,23 @@ resource "local_file" "ssh_priv_key" {
 module "redis_db" {
   source = "../../modules/digitalocean/redis_db"
 
-  name        = "redis-europe"
-  region_slug = "lon1"
-  tags        = [ "europe" ]
+  name        = "redis-asia"
+  region_slug = "sgp1"
+  tags        = [ "asia" ]
 }
 
-module "europe_droplets" {
+module "asia_droplets" {
   source = "../../modules/region_droplets"
 
-  region_slug        = "lon1"
-  region_name        = "europe"
+  region_slug        = "sgp1"
+  region_name        = "asia"
 
   node_count         = var.node_count
   creator_node_count = var.creator_node_count
-  tags               = [ "europe" ]
+  tags               = [ "asia" ]
 
   master_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-23"
+    image    = "registry.digitalocean.com/polusgg/server-loadpolus:v1.0.1-22"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
@@ -44,14 +44,14 @@ module "europe_droplets" {
   }
 
   node_docker = {
-    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-120"
+    image    = "registry.digitalocean.com/polusgg/server-nodepolus:v3.0.1-117"
     env      = [
       "NP_REDIS_HOST=rediss://${module.redis_db.private_host}",
       "NP_REDIS_PORT=${module.redis_db.port}",
       "NP_REDIS_PASSWORD=${module.redis_db.password}",
       "NP_AUTH_TOKEN=${var.accounts_auth_token}",
       "MONGO_URL=${var.event_logging_mongodb_url}",
-      "NP_REGION_NAME=EUROPE",
+      "NP_REGION_NAME=ASIA",
     ]
   }
 
