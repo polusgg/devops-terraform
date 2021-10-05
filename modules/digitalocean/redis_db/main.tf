@@ -34,7 +34,7 @@ resource "digitalocean_database_firewall" "redis_fw" {
     value = "72.68.129.83"
   }
 
-    rule {
+  rule {
     type = "ip_addr"
     value = "86.243.182.143"
   }
